@@ -10,13 +10,13 @@ import java.util.List;
 @RestController
 public class ProductController {
 
-    @Autowired
-    private PService productService;
-
     @GetMapping(value="/product")
     public List<Product> getProduct(){
-        List<Product> products=productService.allProducts();
+        List<Product> products=ProductService.allProducts();
             return products;
     }
-
+    @GetMapping("/product/{id}")
+    public List<Product> getProductById(@PathVariable int id){
+        return ProductService.getProduct(id);
+    }
 }
