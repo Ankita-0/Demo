@@ -1,5 +1,7 @@
 package com.myApplication.product;
 
+import java.util.ArrayList;
+
 public class Product {
     private int id;
     private String name;
@@ -7,9 +9,10 @@ public class Product {
     private String batch;
     private double price;
     private int quantity;
+    private ArrayList<String> c;
     public Product(){}
 
-    public Product(int id, String name, String modelno, String batch, double price, int quantity){
+    public Product(int id, String name, String modelno, String batch, double price, int quantity, ArrayList<String> c){
         super();
         this.id=id;
         this.name=name;
@@ -17,6 +20,7 @@ public class Product {
         this.batch=batch;
         this.price=price;
         this.quantity=quantity;
+        this.c=c;
     }
     public int getId(){
         return id;
@@ -53,5 +57,11 @@ public class Product {
     }
     public void setQuantity(int quantity){
         this.quantity=quantity;
+    }
+    public ArrayList<String> getC(){
+        return c;
+    }
+    public void setC(ArrayList<String> c){
+        this.c=c;
     }
 }
