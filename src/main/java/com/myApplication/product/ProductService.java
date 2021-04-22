@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProductService implements PService{
-
+    @Autowired
+    ProductRepository prepo;
 
     public static List<Product> allProducts() {
 
@@ -45,6 +47,6 @@ public class ProductService implements PService{
 
     }
     public static List<Manufacturer> getProduct(int batch_id, int id) {
-        return allProducts().stream().flatMap(p->p.getproducts().stream()).filter(pr->pr.getId()==id).collect(Collectors.toList());
+        return allProducts().stream().flatMap(p->p.getProducts().stream()).filter(pr->pr.getId()==id).collect(Collectors.toList());
     }
 }
