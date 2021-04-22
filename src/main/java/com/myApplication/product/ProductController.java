@@ -11,12 +11,13 @@ import java.util.List;
 
 @RestController
 public class ProductController {
+    @Autowired
+    ProductService service;
 
     @GetMapping(value="/batches")
-    public List<Product> getProduct(){
-        List<Product> products=ProductService.allProducts();
-            return products;
+    public Iterable<Product> findAll(){
+            return service.findAll();
     }
-    @GetMapping("/batches/{batch_id}/products/{id}")
-    public List<Manufacturer> getProductById(@PathVariable int batch_id, @PathVariable int id){ return ProductService.getProduct(batch_id, id);}
+  //  @GetMapping("/batches/{batch_id}/products/{id}")
+  //  public List<Manufacturer> getProductById(@PathVariable int batch_id, @PathVariable int id){ return ProductService.getProduct(batch_id, id);}
 }

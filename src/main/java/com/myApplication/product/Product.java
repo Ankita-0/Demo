@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 public @Data class Product {
     @Id
+    @Column
     private int batch_id;
     private @Column String name;
     private @Column String batch;

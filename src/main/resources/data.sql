@@ -1,0 +1,3 @@
+insert into Batches(batch_id, name, batch, price, quantity, products) values(1, 'Mobile', '6757Khf', 50000.00, 5, Manufacturer(11, 'Samsung',50000))
+insert into Batches(batch_id, name, batch, price, quantity, products) values(2, 'Mobile', '6757Khf', 50000.00, 5, Manufacturer(21, 'Samsung',50000))
+insert into Batches(batch_id, name, batch, price, quantity, products) values(3, 'Mobile', '6757Khf', 50000.00, 5, Manufacturer(31, 'Samsung',50000))
