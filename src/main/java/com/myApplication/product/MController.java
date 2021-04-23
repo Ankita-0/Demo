@@ -11,18 +11,27 @@ public class MController {
     @Autowired
     MService mserv;
 
-    @GetMapping(value = "/manufacturers")
-    public Iterable<Manufacturer> findAllManufacturer(){
-        return mserv.findAllManufacturer();
-    }
+    @Autowired
+    CartService cserv;
 
-    @GetMapping(value = "/batches/{batchid}/manufacturers")
+
+    @GetMapping(value = "/batches/{batchid}/products")
     List<Manufacturer> findByBatch_id(@PathVariable int batchid){
         return mserv.findAllManufacturerByBatchid(batchid);
     }
 
-    @GetMapping(value = "/batches/{batchid}/manufacturers/{id}")
+    @GetMapping(value = "/batches/{batchid}/products/{id}")
     Manufacturer findbyid(@PathVariable int batchid, @PathVariable int id){
         return mserv.findManufacturerById(id);
+    }
+
+    @PostMapping("/carts")
+    String addToCart(@RequestBody Cart cart){
+        return cserv.addToCart(cart);
+    }
+
+    @GetMapping(value = "/cartItems")
+    public Iterable<Cart> findAll(){
+        return cserv.findAll();
     }
 }
