@@ -7,21 +7,23 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "Manufacturer")
 
+@Table(name = "Manufacturer")
+@Entity
 public @Data class Manufacturer{
-    @Id
+
+    private @Column int batchid;
     @Column
-    private int id;
+    private @Id int id;
     private @Column String name;
     private @Column double price;
 
-    public Manufacturer(int id, String name, double price){
-        super();
+    public Manufacturer(){}
+
+    public Manufacturer(int batchid, int id, String name, double price){
+        this.batchid=batchid;
         this.id=id;
         this.name=name;
         this.price=price;
     }
-
 }
