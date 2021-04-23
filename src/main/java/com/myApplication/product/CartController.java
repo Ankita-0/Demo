@@ -11,9 +11,14 @@ public class CartController {
     @Autowired
     CartService cserv;
 
-    @PostMapping("/carts")
+    @PostMapping("/add")
     String addToCart(@RequestBody Cart cart){
         return cserv.addToCart(cart);
+    }
+
+    @DeleteMapping("/remove/{id}")
+    String delete(@PathVariable int id){
+        return cserv.delete(id);
     }
 
     @GetMapping(value = "/cartItems")

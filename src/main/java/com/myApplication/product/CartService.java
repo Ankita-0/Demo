@@ -19,4 +19,14 @@ public class CartService {
     public Iterable<Cart> findAll(){
         return crepo.findAll();
     }
+
+    public String delete(int id){
+        if(crepo.existsById(id)){
+            crepo.deleteById(id);
+            return "Removed from Cart";
+    }
+        else{
+            return "ITEM DOESN'T EXIST IN CART!";
+        }
+    }
 }
