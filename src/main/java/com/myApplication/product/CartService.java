@@ -1,5 +1,6 @@
 package com.myApplication.product;
 
+import com.myApplication.product.Exception.ItemNotFoundInCartException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,7 +12,17 @@ public class CartService {
     @Autowired
     CartRepo crepo;
 
+    public Cart getProduct(int id){
+        return crepo.findById(id).orElseThrow(() -> new ItemNotFoundInCartException("Item "+id+" not found in cart"));
+    }
+
     public String addToCart(Cart cart){
+        //Cart c=getProduct(cart.getId());
+        if(crepo.existsById(cart.getId())){
+            //int q=cart.getQuantity();
+            crepo.deleteById(cart.getId());
+            cart.setQuantity(cart.getQuantity()+1);
+        }
         crepo.save(cart);
         return "Added to Cart";
     }
@@ -26,7 +37,7 @@ public class CartService {
             return "Removed from Cart";
     }
         else{
-            return "ITEM DOESN'T EXIST IN CART!";
+            throw new ItemNotFoundInCartException("Item "+id+" not found in cart");
         }
     }
 }

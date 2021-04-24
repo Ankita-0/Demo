@@ -15,14 +15,14 @@ public @Data class Cart {
     @Column
     private @Id int id;
     private @Column String name;
-    private @Column double price;
+    private @Column int quantity;
 
     public Cart(){}
 
-    public Cart(int batchid, int id, String name, double price){
+    public Cart(int batchid, int id, String name, int quantity){
         this.batchid=batchid;
         this.id=id;
         this.name=name;
-        this.price=price;
+        this.quantity=quantity;
     }
 }
