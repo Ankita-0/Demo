@@ -23,8 +23,6 @@ public class CartService {
     }
 
     public String addToCart(Cart cart) {
-        //List<Manufacturer> c = mrepo.findByBatchid(cart.getBatchid());
-        //if(c.stream().filter(i->i.getId()== cart.getId())!=null){
         if (mrepo.existsByBatchid(cart.getBatchid()) && mrepo.existsById(cart.getId())) {
                 if (crepo.existsById(cart.getId())) {
                 crepo.deleteById(cart.getId());
