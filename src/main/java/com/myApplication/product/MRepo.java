@@ -7,4 +7,6 @@ import java.util.List;
 @Repository
 public interface MRepo extends CrudRepository<Manufacturer, Integer>{
     List<Manufacturer> findByBatchid(int batchid);
+
+    boolean existsByBatchid(Integer integer);
 }

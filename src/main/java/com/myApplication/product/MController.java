@@ -4,7 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController
 public class MController {
@@ -15,17 +19,19 @@ public class MController {
     ProductService service;
 
     @GetMapping(value = "/batches")
-    public Iterable<Product> findAll() {
-        return service.findAll();
+    public List<Product> findAll() {
+        return StreamSupport
+                .stream(service.findAll().spliterator(), false)
+                .collect(Collectors.toList());
     }
 
     @GetMapping(value = "/batches/{batchid}/products")
-    List<Manufacturer> findByBatch_id(@PathVariable int batchid){
+    List<Manufacturer> findByBatchid(@PathVariable int batchid){
         return mserv.findAllManufacturerByBatchid(batchid);
     }
 
     @GetMapping(value = "/batches/{batchid}/products/{id}")
     Manufacturer findbyid(@PathVariable int batchid, @PathVariable int id){
-        return mserv.findManufacturerById(id);
+        return mserv.findManufacturerById(batchid, id);
     }
 }

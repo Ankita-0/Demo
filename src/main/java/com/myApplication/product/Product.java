@@ -1,5 +1,7 @@
 package com.myApplication.product;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Data;
 import java.util.ArrayList;
 import javax.persistence.Column;
@@ -9,11 +11,14 @@ import javax.persistence.Table;
 
 
 @Table(name = "Batches")
+@JsonPropertyOrder({"batch_id", "name", "batch", "price", "quantity"})
 @Entity
 public @Data class Product {
+
     @Id
     @Column
-    private int batch_id;
+    @JsonProperty("batch_id")
+    private int batchid;
     private @Column String name;
     private @Column String batch;
     private @Column double price;
@@ -21,9 +26,9 @@ public @Data class Product {
     //private @Column ArrayList<Manufacturer> products;
     public Product(){}
 
-    public Product(int batch_id, String name, String batch, double price, int quantity){
+    public Product(int batchid, String name, String batch, double price, int quantity){
         super();
-        this.batch_id=batch_id;
+        this.batchid=batchid;
         this.name=name;
         this.batch=batch;
         this.price=price;

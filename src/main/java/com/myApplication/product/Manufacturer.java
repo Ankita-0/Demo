@@ -1,5 +1,6 @@
 package com.myApplication.product;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.ToString;
 import javax.persistence.Column;
@@ -8,10 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 
-@Table(name = "Manufacturer")
+@Table(name = "Products")
 @Entity
 public @Data class Manufacturer{
-
+    @JsonProperty("batch_id")
     private @Column int batchid;
     @Column
     private @Id int id;

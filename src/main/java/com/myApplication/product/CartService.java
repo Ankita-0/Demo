@@ -1,30 +1,42 @@
 package com.myApplication.product;
 
+import com.myApplication.product.Exception.ItemNotFoundException;
 import com.myApplication.product.Exception.ItemNotFoundInCartException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class CartService {
     @Autowired
     CartRepo crepo;
+    @Autowired
+    MRepo mrepo;
 
     public Cart getProduct(int id){
         return crepo.findById(id).orElseThrow(() -> new ItemNotFoundInCartException("Item "+id+" not found in cart"));
     }
 
-    public String addToCart(Cart cart){
-        //Cart c=getProduct(cart.getId());
-        if(crepo.existsById(cart.getId())){
-            //int q=cart.getQuantity();
-            crepo.deleteById(cart.getId());
-            cart.setQuantity(cart.getQuantity()+1);
+    public String addToCart(Cart cart) {
+        //List<Manufacturer> c = mrepo.findByBatchid(cart.getBatchid());
+        //if(c.stream().filter(i->i.getId()== cart.getId())!=null){
+        if (mrepo.existsByBatchid(cart.getBatchid()) && mrepo.existsById(cart.getId())) {
+                if (crepo.existsById(cart.getId())) {
+                crepo.deleteById(cart.getId());
+                cart.setQuantity(cart.getQuantity() + 1);
+            }
+            crepo.save(cart);
+            return "Added to Cart";
         }
-        crepo.save(cart);
-        return "Added to Cart";
+        else{
+            throw new ItemNotFoundException("Product having batch id:" + cart.getBatchid()
+                    +" and id:"+cart.getId()+" not found");
+        }
     }
 
     public Iterable<Cart> findAll(){
@@ -37,7 +49,7 @@ public class CartService {
             return "Removed from Cart";
     }
         else{
-            throw new ItemNotFoundInCartException("Item "+id+" not found in cart");
+            throw new ItemNotFoundInCartException("Product "+id+" not found in cart");
         }
     }
 }
