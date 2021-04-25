@@ -23,7 +23,7 @@ public class CartService {
     }
 
     public String addToCart(Cart cart) {
-        if (mrepo.existsByBatchid(cart.getBatchid()) && mrepo.existsById(cart.getId())) {
+        if (mrepo.existsByBatchid(cart.getBatchid()) && mrepo.existsById(cart.getId()) && mrepo.existsByName(cart.getName())) {
                 if (crepo.existsById(cart.getId())) {
                 crepo.deleteById(cart.getId());
                 cart.setQuantity(cart.getQuantity() + 1);

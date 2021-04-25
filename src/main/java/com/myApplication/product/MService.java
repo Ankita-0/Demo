@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class MService {
@@ -21,10 +23,20 @@ public class MService {
     }
 
     public List<Manufacturer> findAllManufacturerByBatchid(int batchid){
-        return mrepo.findByBatchid(batchid);
+        if(mrepo.existsByBatchid(batchid)){
+            return mrepo.findByBatchid(batchid);
+        }
+        else {
+            throw new ItemNotFoundException("Items having batch_id:"+batchid+" not found");
+        }
     }
 
     public Manufacturer findManufacturerById(int batchid, int id){
-                return mrepo.findById(id).get();
-            }
+        if(mrepo.existsByBatchid(batchid) && mrepo.existsById(id)) {
+            return mrepo.findById(id).get();
+        }
+        else{
+            throw new ItemNotFoundException("Item having batch_id:"+batchid+" and id:"+id+" not found");
+        }
+    }
 }

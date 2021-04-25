@@ -9,4 +9,6 @@ public interface MRepo extends CrudRepository<Manufacturer, Integer>{
     List<Manufacturer> findByBatchid(int batchid);
 
     boolean existsByBatchid(Integer integer);
+
+    boolean existsByName(String name);
 }
