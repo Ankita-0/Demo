@@ -25,4 +25,9 @@ public class CartController {
     public Iterable<Cart> findCartItems(){
         return cserv.findAll();
     }
+
+    @GetMapping(value = "/checkout")
+    public String checkout(){
+        return cserv.checkout();
+    }
 }

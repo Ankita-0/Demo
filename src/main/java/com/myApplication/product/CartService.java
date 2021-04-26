@@ -1,5 +1,6 @@
 package com.myApplication.product;
 
+import com.myApplication.product.Exception.CartIsEmptyException;
 import com.myApplication.product.Exception.ItemNotFoundException;
 import com.myApplication.product.Exception.ItemNotFoundInCartException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,24 @@ public class CartService {
         else{
             throw new ItemNotFoundInCartException("Product not found in cart");
         }
+    }
+
+    public String orderPlaced(Iterable<Cart> cart){
+        List<Cart> c=StreamSupport
+                .stream(findAll().spliterator(), false)
+                .collect(Collectors.toList());
+
+        if(c.size()>0) {
+            return "Order Placed";
+        }
+        else{
+            throw new CartIsEmptyException("Cart is Empty");
+        }
+    }
+
+    public String checkout(){
+        String msg=orderPlaced(findAll());
+        crepo.deleteAll();
+        return msg;
     }
 }
