@@ -6,4 +6,5 @@ import java.util.Optional;
 
 @Repository
 public interface CartRepo extends CrudRepository<Cart, Integer> {
+    boolean existsByBatchidAndId(int batchid, int id);
 }

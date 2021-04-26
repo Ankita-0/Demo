@@ -16,9 +16,9 @@ public class CartController {
         return cserv.addToCart(cart);
     }
 
-    @DeleteMapping("/remove/{id}")
-    String delete(@PathVariable int id){
-        return cserv.delete(id);
+    @DeleteMapping("/cartItems/{batchid}/{id}/remove")
+    String delete(@PathVariable int batchid, @PathVariable int id){
+        return cserv.delete(batchid, id);
     }
 
     @GetMapping(value = "/cartItems")

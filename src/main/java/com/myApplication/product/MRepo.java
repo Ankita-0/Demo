@@ -1,5 +1,6 @@
 package com.myApplication.product;
 
+import org.springframework.data.domain.Example;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;
@@ -11,4 +12,8 @@ public interface MRepo extends CrudRepository<Manufacturer, Integer>{
     boolean existsByBatchid(Integer integer);
 
     boolean existsByName(String name);
+
+    boolean existsByBatchidAndName(int batchid, String name);
+
+    boolean existsByIdAndName(int id, String name);
 }

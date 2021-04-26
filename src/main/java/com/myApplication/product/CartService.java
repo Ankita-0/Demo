@@ -3,6 +3,7 @@ package com.myApplication.product;
 import com.myApplication.product.Exception.ItemNotFoundException;
 import com.myApplication.product.Exception.ItemNotFoundInCartException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
 import java.util.ArrayList;
@@ -23,8 +24,8 @@ public class CartService {
     }
 
     public String addToCart(Cart cart) {
-        if (mrepo.existsByBatchid(cart.getBatchid()) && mrepo.existsById(cart.getId()) && mrepo.existsByName(cart.getName())) {
-                if (crepo.existsById(cart.getId())) {
+        if(mrepo.existsByBatchidAndName(cart.getBatchid(), cart.getName()) && mrepo.existsByIdAndName(cart.getId(), cart.getName())){
+            if (crepo.existsById(cart.getId())) {
                 crepo.deleteById(cart.getId());
                 cart.setQuantity(cart.getQuantity() + 1);
             }
@@ -32,8 +33,7 @@ public class CartService {
             return "Added to Cart";
         }
         else{
-            throw new ItemNotFoundException("Product having batch id:" + cart.getBatchid()
-                    +" and id:"+cart.getId()+" not found");
+            throw new ItemNotFoundException("Product not found in the product catalog");
         }
     }
 
@@ -41,13 +41,13 @@ public class CartService {
         return crepo.findAll();
     }
 
-    public String delete(int id){
-        if(crepo.existsById(id)){
+    public String delete(int batchid, int id){
+        if(crepo.existsByBatchidAndId(batchid, id)){
             crepo.deleteById(id);
             return "Removed from Cart";
     }
         else{
-            throw new ItemNotFoundInCartException("Product "+id+" not found in cart");
+            throw new ItemNotFoundInCartException("Product not found in cart");
         }
     }
 }
