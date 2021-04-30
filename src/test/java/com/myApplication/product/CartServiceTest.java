@@ -7,6 +7,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,11 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest //(classes=ProductApplication.class)
 class CartServiceTest {
+    @MockBean
+    CartService cserv;
+
+    @Autowired
+    MockMvc mvc;
 
     MRepo mrepo= Mockito.mock(MRepo.class);
 
@@ -27,17 +34,23 @@ class CartServiceTest {
     ProductRepository prepo=Mockito.mock(ProductRepository.class);
 
     @BeforeEach
-    void setUp() throws Exception{}
+    void setUp() throws Exception{
+        CartService cartService=new CartService();
+    }
+
 
     @Test
-    void addToCartTest() {
+    void addToCartTest() throws Exception {
         CartService cartService=new CartService();
         Cart c=new Cart(1,11,"Apple",1);
         when(mrepo.existsByBatchidAndName(anyInt(), anyString())).thenReturn(Boolean.TRUE);
         when(mrepo.existsByIdAndName(anyInt(), anyString())).thenReturn(Boolean.TRUE);
         when(crepo.existsById(anyInt())).thenReturn(Boolean.FALSE);
+        String s=cartService.addToCart(c);
+        assertEquals("Added to Cart", s);
 
     }
+
 
     /*@Test
     void addToCartTest2(){

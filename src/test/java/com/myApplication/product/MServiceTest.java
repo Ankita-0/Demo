@@ -15,8 +15,11 @@ import java.util.Optional;
 
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyIterable;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -26,6 +29,8 @@ class MServiceTest<plst> {
 
     @Mock
     MRepo mrepo;
+    //@Autowired
+    //MRepo mrepo;
 
     @Mock
     MService mserv;
@@ -46,18 +51,26 @@ class MServiceTest<plst> {
 
     @Test
     void testfindAllManufacturer() throws Exception {
-        given(mcon.findAll()).willReturn(plst);
-        mvc.perform(get("/batches")).andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)));
-    }
-        /*Manufacturer prod=new Manufacturer(1, 11, "ABC", 50000.00);
-        doReturn(Optional.of(prod)).when(mrepo.findById(1));
-        Manufacturer returnProduct=mserv.findManufacturerById(1, 11);
-        Assertions.assertSame(returnProduct, prod);
+        //given(mcon.findAll()).willReturn(plst);
+        //mvc.perform(get("/batches")).andExpect(status().isOk())
+                //.andExpect(jsonPath("$", hasSize(1)));
+        Manufacturer m= new Manufacturer(1, 11, "ABC", 50000.00);
+        //mrepo.save(m);
+        //assertNotNull(mrepo.findAll());
+        MService mserv=new MService();
+        List<Manufacturer> lst=new ArrayList<>();
+        lst.add(m);
+        when(mrepo.findAll()).thenReturn(anyIterable());
+        Iterable<Manufacturer> mr=mserv.findAllManufacturer();
+        assertSame(lst, mr);
+
+        //assertTrue();
+        //doReturn(Optional.of(prod)).when(mrepo.findById(anyInt()));
+       // doReturn(Optional.of(prod)).when(mserv.findManufacturerById(anyInt(), anyInt()));
+       // Manufacturer returnProduct=mserv.findManufacturerById(1, 11);
+       // Assertions.assertSame(returnProduct, prod);
 
     }
-
-         */
 
    // @Test
     //public void test

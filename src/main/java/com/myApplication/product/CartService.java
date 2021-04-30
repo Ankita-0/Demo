@@ -64,7 +64,6 @@ public class CartService {
             throw new CartIsEmptyException("Cart is Empty");
         }
     }
-
     public String checkout(){
         String msg=orderPlaced(findAll());
         crepo.deleteAll();
