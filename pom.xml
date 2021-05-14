@@ -159,6 +159,7 @@
 						<includeOnlyProperty>^git.build.(time|version)$</includeOnlyProperty>
 						<includeOnlyProperty>^git.commit.id.(abbrev|full)$</includeOnlyProperty>
 						<includeOnlyProperty>git.commit.message.full</includeOnlyProperty>
+						<includeOnlyProperty>git.commit.time</includeOnlyProperty>
 					</includeOnlyProperties>
 					<commitIdGenerationMode>full</commitIdGenerationMode>
 				</configuration>
