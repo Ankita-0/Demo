@@ -13,7 +13,7 @@ import javax.persistence.*;
 @ApiModel(description="Details about the products present in Batches")
 public @Data class Manufacturer {
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, targetEntity = Product.class, optional = false)
+    @ManyToOne(targetEntity = Product.class, optional = false)
     @JoinColumn(name = "batchid", insertable = false, updatable = false)
     @JsonIgnore
     private Product product;

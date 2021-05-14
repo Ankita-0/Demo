@@ -36,9 +36,8 @@ public @Data class Product implements Serializable {
     private  int quantity;
 
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
-    @ElementCollection
-    //@ApiModelProperty(notes = "List of Products in a Batch")
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @ApiModelProperty(notes = "List of Products in a Batch")
     private List<Manufacturer> products=new ArrayList<Manufacturer>();
     public Product(){}
 
