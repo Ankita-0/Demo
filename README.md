@@ -11,7 +11,7 @@ Circuit breaker pattern: [Circuit Breaker Implementation](https://github.com/Ank
 **View all the products in a particular batch(GET):** Get the details of all the products in a particular batch.
    - *http://localhost:8080/batches/{batchid}/products*
    
-**View details os a specific product(GET):** Get details of a product.
+**View details of a specific product(GET):** Get details of a product.
   - *http://localhost:8080/batches/{batchid}/products/{id}*
 ##
 
