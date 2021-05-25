@@ -29,18 +29,6 @@ public class MController {
 
     Logger logger= LoggerFactory.getLogger(MController.class);
 
-    @ApiOperation(value="This method is for logs", hidden = true)
-    @RequestMapping("/log")
-    public String index(){
-        logger.trace("A TRACE Message");
-        logger.debug("A DEBUG Message");
-        logger.info("An INFO Message");
-        logger.warn("A WARN Message");
-        logger.error("An ERROR Message");
-
-        return "Check logs to see the output";
-    }
-
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Gives the details of all the Batches", notes="List of Batches", response=Product.class,responseContainer = "List")
     @ApiResponses(value={
@@ -59,6 +47,7 @@ public class MController {
             @ApiResponse(code=200, message="Successful Retrieval")})
     @GetMapping(value = "/batches/{batchid}/products")
     List<Manufacturer> findByBatchid(@PathVariable int batchid){
+        logger.info("Getting all the products having batch_id "+batchid);
         return mserv.findAllManufacturerByBatchid(batchid);
     }
 

@@ -1,4 +1,4 @@
-package applicationTest;
+package ProductCatalogue.applicationTest;
 
 import ProductCatalogue.ModelAndRepository.Cart;
 import ProductCatalogue.ModelAndRepository.Manufacturer;
@@ -78,7 +78,7 @@ public class ControllersTest extends AbstractMapping{
         assertEquals(200, status);
         String content=mvcResult.getResponse().getContentAsString();
         Cart[] carts=super.mapFromJson(content, Cart[].class);
-        assertEquals(0, carts.length);
+        assertTrue(carts.length==0);
     }
 
     @Test
