@@ -37,7 +37,7 @@ Circuit breaker pattern: [Circuit Breaker Implementation](https://github.com/Ank
 ## Actuator:
 ### Endpoints:
 
-**Created a health group named custom containing only the dp health indicator:**
+**Created a health group named custom containing only the db health indicator:**
   - *http://localhost:8080/actuator/health/custom*
   
 **Git information:**
