@@ -6,11 +6,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @Api(value="Endpoints for cart")
 @RestController
 public class CartController {
@@ -24,6 +26,7 @@ public class CartController {
             @ApiResponse(code= 201, message= "Created")})
     @PostMapping("/batches/{batchid}/products/{id}/add")
     public ResponseEntity<String> addToCart(@PathVariable int batchid, @PathVariable int id, @RequestBody Cart cart){
+        log.info("adding to cart product id " + id);
         return new ResponseEntity<>(cserv.addToCart(batchid, id, cart), HttpStatus.CREATED);
     }
 
