@@ -25,6 +25,3 @@ public class ProductApplication extends SpringBootServletInitializer {
 				.apis(RequestHandlerSelectors.basePackage("ProductCatalogue")).build();
 	}
 }
-
-
-

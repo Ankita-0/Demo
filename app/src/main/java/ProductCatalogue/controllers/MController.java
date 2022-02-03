@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
+@Slf4j
 @Api(value = "Endpoints for details of batches and products")
 @RestController
 public class MController {
@@ -26,9 +27,7 @@ public class MController {
 
     @Autowired
     ProductService service;
-
-    Logger logger= LoggerFactory.getLogger(MController.class);
-
+    //Logger logger= LoggerFactory.getLogger(MController.class);
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "Gives the details of all the Batches", notes="List of Batches", response=Product.class,responseContainer = "List")
     @ApiResponses(value={
@@ -47,7 +46,7 @@ public class MController {
             @ApiResponse(code=200, message="Successful Retrieval")})
     @GetMapping(value = "/batches/{batchid}/products")
     List<Manufacturer> findByBatchid(@PathVariable int batchid){
-        logger.info("Getting all the products having batch_id "+batchid);
+        log.info("Getting all the products having batch_id "+batchid);
         return mserv.findAllManufacturerByBatchid(batchid);
     }
 
